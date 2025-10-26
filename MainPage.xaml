@@ -6,7 +6,7 @@
              x:Class="MauiApp1.MainPage">
 
     <VerticalStackLayout Padding="20" Spacing="12">
-        <Button Text="Загрузить" Clicked="OnChildMeasureInvalidated" />
+        <Button Text="Загрузить" Clicked="SobitieHttpLocalAnytype" />
         <Button Text="+" Command = "{Binding PlusCommand}"/>
         <Button Text="-" Command="{Binding MinusCommand}"/>
         

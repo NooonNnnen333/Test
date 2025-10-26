@@ -24,32 +24,8 @@ public partial class MyViewModel : ObservableObject
      [ObservableProperty]
      public int integerForPodsoch;
 
-
-     //[RelayCommand]
-     public async Task HttpLocalAnytype()
-     {
-         
-         HttpClient httpClient = new HttpClient();
-
-         const string apiS = "tOvGVpB0iUw+zqDhDRJx8LI5lBq2+YQYsbX8pRTOf5I=";
-         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiS}");
-         httpClient.DefaultRequestHeaders.Add("Anytype-Version", "2025-05-20");
-
-         string stringSpaces = "http://127.0.0.1:31009/v1/spaces/bafyreidquhlyswvgqvohopc4mdwmrdyrbpw7y3cbzuq3fdziu77w64ihae.qenaqgjnfwsy/objects";
-         var rawObjects = await httpClient.GetAsync(stringSpaces);
-         string objects = await rawObjects.Content.ReadAsStringAsync();
-         JObject onThisClassSpaces = JObject.Parse(objects);
-         var spacess = onThisClassSpaces["data"];
-
-         int i = 0;
-         foreach (var sp in spacess)
-         {
-             Spacesq.Add(sp["name"].ToString()[0..15]);
-             i++;
-             if (i >= 11) break;
-         }
-         
-     }
+     
+     
 
      [RelayCommand]
      public async Task Plus()
@@ -63,4 +39,35 @@ public partial class MyViewModel : ObservableObject
          IntegerForPodsoch--;
      }
      
+}
+
+public class HttpClass
+{
+    public async Task HttpLocalAnytype()
+    {
+        Thread.Sleep(10000);
+         
+        HttpClient httpClient = new HttpClient();
+
+        const string apiS = "tOvGVpB0iUw+zqDhDRJx8LI5lBq2+YQYsbX8pRTOf5I=";
+        httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiS}");
+        httpClient.DefaultRequestHeaders.Add("Anytype-Version", "2025-05-20");
+
+        string stringSpaces = "http://127.0.0.1:31009/v1/spaces/bafyreidquhlyswvgqvohopc4mdwmrdyrbpw7y3cbzuq3fdziu77w64ihae.qenaqgjnfwsy/objects";
+        var rawObjects = await httpClient.GetAsync(stringSpaces);
+        string objects = await rawObjects.Content.ReadAsStringAsync();
+        JObject onThisClassSpaces = JObject.Parse(objects);
+        var spacess = onThisClassSpaces["data"];
+
+        int i = 0;
+        foreach (var sp in spacess)
+        {
+            ObList.Add(sp["name"].ToString()[0..15]);
+            i++;
+            if (i >= 11) break;
+        }
+         
+    }
+
+    public List<string> ObList;
 }
